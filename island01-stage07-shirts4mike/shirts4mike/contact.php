@@ -1,14 +1,17 @@
 <?php 
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//*bu if sta ile sayfa reload edilirken if sta içi yürütülmez*
+if ($_SERVER["REQUEST_METHOD"] == "POST") { // **form submit edilirse aktif olur**
     // **2. handles the submission**
     $name = trim($_POST["name"]);
     $email = trim($_POST["email"]);
     $message = trim($_POST["message"]);
     
     // ***!!!FORM VALIDATION!!!***
-    // **$name == "" yerine !isset($name) denmemesine dikkat
-    // çünkü field boş bırakılsa da her seferinde $name set edilmiş olur**
+    // ***$name == "" yerine !isset($name) denmemesine dikkat
+    // çünkü field boş bırakılsa da her seferinde value (name ile) set edilmiş olur 
+    // ve hiç input olmasa bile value null olur.
+    // checkbox veya radio button olsaydı yukarıda assignment yapılırken
+    // if (isset($_POST[name]) {$name=$_POST[name];} else {$name='';} denecekti***
     if ($name == "" OR $email == "" OR $message == "") {
         echo "You must specify a value for name, email address, and message.";
         exit();
@@ -31,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // ***!!!FOR SENDING EMAIL WE USE PHP MAILER LIBRARY!!!***
     // *to send the email we are also suggested to use a 
     // separate mail server (i.e. postmark, gmail, sntp)
-    // instead of web server which wudnt work on local server 
-    // (wudnt likely work on web server as well)*
+    // instead of that of web server (?)
+    // (local server wudnt work at all to send mail)*
     require_once("inc/phpmailer/class.phpmailer.php");
     $mail = new PHPMailer();
 
@@ -83,6 +86,7 @@ include('inc/header.php'); ?>
                 <p>I&rsquo;d love to hear from you! Complete the form to send me an email.</p>
 
                 <form method="post" action="contact.php">
+                <!-- **aynı sayfaya submit ediliyor** -->
 
                     <table>
                         <tr>

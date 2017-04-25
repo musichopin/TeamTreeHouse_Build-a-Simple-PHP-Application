@@ -1,5 +1,5 @@
 <?php 
-// **aşağıdaki html'deki formu bulunduğumuz sayfa olan contact.php'ye submit edince sayfa reload oluyor ve yukarıdan itibaren if statementlar recheck ediliyor. ilk if sta'da query string ekleniyor ve sayfa redirect ediliyor (2. refresh gibi). ardından query stringde "thanks"  valuesu bulunduğundan html'deki ilk if statement gerçekleşiyor (?)**
+// **aşağıdaki html'deki formu bulunduğumuz sayfa olan contact.php'ye submit edince sayfa reload oluyor ve yukarıdan itibaren if statementlar recheck ediliyor. ilk if sta'da query string ekleniyor ve sayfa redirect ediliyor (2. refresh gibi). ardından query stringde "thanks"  valuesu bulunduğundan html'deki ilk if statement gerçekleşiyor**
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // checks the request method
     $name = $_POST["name"];
     $email =  $_POST["email"];
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // checks the request method
 
     // TODO: Send Email
 
-    header("Location: contact.php?status=thanks"); // **redirects**
+    header("Location: contact.php?status=thanks"); // **redirects to the same page**
     //  ***on regular request for a web page the method is get, that is why we cud add query string. 
     // query string variables are stored in a global array named $_GET (just like form element names being stored in another global array named $_POST)
     // instead of $_POST and $_GET we cud use $_REQUEST superglobal array***
