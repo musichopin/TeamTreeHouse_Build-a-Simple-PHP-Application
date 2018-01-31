@@ -1,18 +1,22 @@
 <?php 
-//*bu if sta ile sayfa reload edilirken if sta içi yürütülmez*
+//*bu if sta sayesinde sayfa reload edilirken if sta içi yürütülmez*
 if ($_SERVER["REQUEST_METHOD"] == "POST") { // **form submit edilirse aktif olur**
+// **aynı sayfada birden fazla form olsaydı if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['button_name'])) denecekti**
+
     // **2. handles the submission**
     $name = trim($_POST["name"]);
     $email = trim($_POST["email"]);
-    $message = trim($_POST["message"]);
+    $message = trim($_POST["message"]); /*body*/
     
     // ***!!!FORM VALIDATION!!!***
-    // ***$name == "" yerine !isset($name) denmemesine dikkat
-    // çünkü field boş bırakılsa da her seferinde value (name ile) set edilmiş olur 
+    // textbox, text-area, password, select fieldleri boş bırakılsa da 
+    // her seferinde value (name attr ile) set edilmiş olur 
     // ve hiç input olmasa bile value null olur.
     // checkbox veya radio button olsaydı yukarıda assignment yapılırken
-    // if (isset($_POST[name]) {$name=$_POST[name];} else {$name='';} denecekti***
+    // if (isset($_POST[name])) {$name=$_POST[name];} else {$name='';} denecekti
+    // (ancak garanti olsun diye bu yöntem diğer fieldlere de uygulanabilir)***
     if ($name == "" OR $email == "" OR $message == "") {
+    // **if (empty($name) or empty($email) or empty($message)) denebilirdi**
         echo "You must specify a value for name, email address, and message.";
         exit();
     }
@@ -31,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // **form submit edilirse aktif olur
         exit();
     }
 
-    // ***!!!FOR SENDING EMAIL WE USE PHP MAILER LIBRARY!!!***
+    // ***!!!FOR SENDING EMAIL WE USE PHPMailer OBJECT (NOT mail() function of php)!!!***
     // *to send the email we are also suggested to use a 
     // separate mail server (i.e. postmark, gmail, sntp)
     // instead of that of web server (?)
@@ -54,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // **form submit edilirse aktif olur
     // returns in the email body instead of php escape characters**
 
     $mail->SetFrom($email, $name);
-    $address = "orders@shirts4mike.com";
+    $address = "orders@shirts4mike.com"; /* **to e-mail** */
     $mail->AddAddress($address, "Shirts 4 Mike");
     $mail->Subject    = "Shirts 4 Mike Contact Form Submission | " . $name;
     $mail->MsgHTML($email_body);
@@ -68,6 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // **form submit edilirse aktif olur
     exit();
 }
 ?><?php 
+// **yukarıdaki php kodları arasını başka bir php sayfasına yazıp, o php sayfasını burada include etmek daha iyi olabilir**
 $pageTitle = "Contact Mike";
 $section = "contact";
 include('inc/header.php'); ?>
