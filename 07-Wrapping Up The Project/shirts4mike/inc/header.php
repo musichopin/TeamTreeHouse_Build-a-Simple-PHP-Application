@@ -17,11 +17,11 @@
 				<li class="shirts <?php if ($section == "shirts") { echo "on"; } ?>"><a href="shirts.php">Shirts</a></li>
 				<li class="contact <?php if ($section == "contact") { echo "on"; } ?>"><a href="contact.php">Contact</a></li>
 				<li class="cart"><a target="paypal" href="https://www.paypal.com/cgi-bin/webscr?cmd=_cart&amp;business=Q6NFNPFRBWR8S&amp;display=1">Shopping Cart</a></li>
-				<!-- ***shopping carta yönlendiren bu link paypal.com'dan alındı. 
+				<!-- shopping carta yönlendiren bu link paypal.com'dan alındı. 
 				ilk başta type ı post olan form olmasına rağmen linke (linklerin typeı gettir) çevrildi
 				https://www.paypal.com/cgi-bin/webscr -> formdaki action
 				cmd, business, display -> formdaki nameler
-				_cart, Q6NFNPFRBWR8S, 1 -> formdaki (hazır) valuelar***-->
+				_cart, Q6NFNPFRBWR8S, 1 -> formdaki (hazır) valuelar-->
 			</ul>
 
 		</div>

@@ -1,11 +1,22 @@
 <?php include("inc/products.php");
 
+//alt: if ((isset($_GET["id"])) && ($_GET["id"] != "")) {
 if (isset($_GET["id"])) {
 	$product_id = $_GET["id"];
 	if (isset($products[$product_id])) {
 		$product = $products[$product_id];
 	}
 }
+
+// *assoc array w/ empty str as value equals 2 GET array w/o value on url:*
+// $ar = ["a"=>""];
+// if (isset($ar["a"])) echo 2 . "<br>";
+// print_r($ar);
+// print "<br>";
+// print_r($_GET);
+// exit;
+
+//not alt: if ((!isset($_GET["id"])) || ($_GET["id"] == "")) {	
 if (!isset($product)) {
 	header("Location: shirts.php");
 	exit();
@@ -38,19 +49,19 @@ include("inc/header.php"); ?>
 						<input type="hidden" name="hosted_button_id" value="<?php echo $product["paypal"]; ?>">
 						<input type="hidden" name="item_name" value="<?php echo $product["name"]; ?>">
 						<table>
-						<tr>
-							<th>
-								<input type="hidden" name="on0" value="Size">
-								<label for="os0">Size</label>
-							</th>
-							<td>
-								<select name="os0" id="os0">
-									<?php foreach($product["sizes"] as $size) { ?>
-									<option value="<?php echo $size; ?>"><?php echo $size; ?> </option>
-									<?php } ?>
-								</select>
-							</td>
-						</tr>
+							<tr>
+								<th>
+									<input type="hidden" name="on0" value="Size">
+									<label for="os0">Size</label>
+								</th>
+								<td>
+									<select name="os0" id="os0">
+										<?php foreach($product["sizes"] as $size) { ?>
+										<option value="<?php echo $size; ?>"><?php echo $size; ?> </option>
+										<?php } ?>
+									</select>
+								</td>
+							</tr>
 						</table>
 						<input type="submit" value="Add to Cart" name="submit">
 					</form>

@@ -1,5 +1,5 @@
-<!-- **user would be redirected to this page from paypal.com after transaction.
-this is a confirmation page which we wud be redirected once the transaction is completed** -->
+<!-- user would be redirected to this page from paypal.com after transaction.
+this is a confirmation page to which we wud be redirected once the transaction is completed -->
 <?php
 $pageTitle = "Thank you for your order!";
 $section = "none";
